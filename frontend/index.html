@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FindIt helps campus communities reunite people with lost belongings.">
+  <title>FindIt — Campus Lost & Found</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="#home">🔎 FindIt</a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#items">Browse Items</a>
+      <a href="#report">Report Item</a>
+    </nav>
+    <a class="nav-button" href="#report">+ Report an item</a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">YOUR CAMPUS LOST & FOUND</span>
+        <h1>Lost something?<br><span>Let's find it.</span></h1>
+        <p>One place for lost belongings, found items, and the people helping bring them home.</p>
+
+        <form id="search-form" class="search-bar">
+          <span aria-hidden="true">⌕</span>
+          <input id="search-input" type="search"
+            placeholder="Search bottle, backpack, books..."
+            aria-label="Search item reports">
+          <button type="submit">Search</button>
+        </form>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#report">＋ Report an item</a>
+          <a class="button button-secondary" href="#items">Browse reports ↓</a>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="floating-card card-top">
+          <span class="mini-icon">🎒</span>
+          <div><strong>Black backpack</strong><small>Found · Library</small></div>
+          <span class="dot"></span>
+        </div>
+        <div class="illustration">🔎</div>
+        <div class="floating-card card-bottom">
+          <span class="mini-icon">💧</span>
+          <div><strong>Blue water bottle</strong><small>Possible match nearby</small></div>
+          <span class="match-tag">MATCH</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Platform statistics">
+      <div><strong id="total-count">0</strong><span>Total reports</span></div>
+      <div><strong id="lost-count">0</strong><span>Items lost</span></div>
+      <div><strong id="found-count">0</strong><span>Items found</span></div>
+      <div><strong id="recovered-count">0</strong><span>Items recovered</span></div>
+    </section>
+
+    <section class="section" id="items">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">THE COMMUNITY BOARD</span>
+          <h2>Explore recent reports</h2>
+          <p>Every report is a chance to reunite someone with what matters.</p>
+        </div>
+        <label class="filter-label">
+          <span>Show</span>
+          <select id="status-filter" aria-label="Filter reports by status">
+            <option value="all">All reports</option>
+            <option value="Lost">Lost items</option>
+            <option value="Found">Found items</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="category-list" aria-label="Filter by category">
+        <button class="category-chip active" data-category="all">All items</button>
+        <button class="category-chip" data-category="Electronics">💻 Electronics</button>
+        <button class="category-chip" data-category="Bags">🎒 Bags</button>
+        <button class="category-chip" data-category="Accessories">💧 Accessories</button>
+        <button class="category-chip" data-category="Books">📚 Books</button>
+        <button class="category-chip" data-category="Other">📦 Other</button>
+      </div>
+
+      <div id="item-grid" class="item-grid"></div>
+      <p id="empty-message" class="empty-message" hidden>No matching reports. Try a different search or filter.</p>
+    </section>
+
+    <section class="match-banner">
+      <div class="match-symbol">✦</div>
+      <div>
+        <span class="eyebrow">SMARTER RECOVERY</span>
+        <h2>Lost and found. Brought together.</h2>
+        <p>FindIt can compare descriptions, categories, and locations to suggest possible matches.</p>
+      </div>
+      <a class="button button-light" href="#items">Explore reports →</a>
+    </section>
+
+    <section class="section report-section" id="report">
+      <div class="report-intro">
+        <span class="eyebrow">BE A CAMPUS HERO</span>
+        <h2>Let's get it back where it belongs.</h2>
+        <p>Lost something, or found an item someone might be missing? Add a report below.</p>
+        <div class="privacy-note">🔒 Avoid posting passwords, full ID numbers, or private contact details.</div>
+      </div>
+
+      <form id="report-form" class="report-form">
+        <label>
+          Item name *
+          <input id="item-name" required maxlength="70" placeholder="e.g. Blue water bottle">
+        </label>
+
+        <label>
+          Report type *
+          <select id="item-status" required>
+            <option value="Lost">I lost this item</option>
+            <option value="Found">I found this item</option>
+          </select>
+        </label>
+
+        <label>
+          Category *
+          <select id="item-category" required>
+            <option value="Electronics">Electronics</option>
+            <option value="Bags">Bags</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Books">Books</option>
+            <option value="Clothing">Clothing</option>
+            <option value="ID Cards">ID Cards</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+
+        <label>
+          Campus location *
+          <input id="item-location" required maxlength="100" placeholder="e.g. Library, Block C">
+        </label>
+
+        <label>
+          Date lost or found *
+          <input id="item-date" type="date" required>
+        </label>
+
+        <label>
+          Item photo (optional)
+          <input id="item-photo" type="file" accept="image/png,image/jpeg,image/webp">
+        </label>
+
+        <label class="full-width">
+          Description *
+          <textarea id="item-description" required maxlength="500"
+            placeholder="Describe the item, its colour, and identifying features. Keep sensitive details private."></textarea>
+        </label>
+
+        <div class="full-width form-footer">
+          <button type="submit" class="button button-primary">Submit report →</button>
+          <p id="form-message" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="tinyfish-section">
+      <div class="tinyfish-icon">✦</div>
+      <div>
+        <span class="eyebrow">COMING IN THE NEXT PHASE</span>
+        <h2>Campus information, all in one place.</h2>
+        <p>Our planned TinyFish integration will retrieve relevant information from supported public websites, with links to the original sources. This feature will appear here once the backend integration is configured and tested.</p>
+        <span class="integration-status">Integration not configured yet</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="logo footer-logo" href="#home">🔎 FindIt</a>
+    <p>Small acts of help make a connected campus.</p>
+    <span>Campus Lost & Found · Student project</span>
+  </footer>
+</body>
+</html>
