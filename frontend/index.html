@@ -7,7 +7,8 @@
   <meta name="description" content="FindIt helps campus communities reunite people with lost belongings.">
   <title>FindIt — Campus Lost & Found</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js" defer></script>
 </head>
 <body>
   <header class="navbar">
@@ -65,20 +66,49 @@
       <div><strong id="recovered-count">0</strong><span>Items recovered</span></div>
     </section>
 
-    <section class="section" id="items">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">THE COMMUNITY BOARD</span>
-          <h2>Explore recent reports</h2>
-          <p>Every report is a chance to reunite someone with what matters.</p>
-        </div>
-        <label class="filter-label">
-          <span>Show</span>
-          <select id="status-filter" aria-label="Filter reports by status">
-            <option value="all">All reports</option>
-            <option value="Lost">Lost items</option>
-            <option value="Found">Found items</option>
-          </select>
+    
+<section class="section" id="items">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">THE COMMUNITY BOARD</span>
+      <h2>Explore recent reports</h2>
+      <p>Every report is a chance to reunite someone with what matters.</p>
+    </div>
+
+    <div class="report-filters">
+      <label class="filter-label">
+        <span>Campus</span>
+        <select id="campus-filter" aria-label="Filter reports by campus">
+          <option value="all">All Campuses</option>
+        </select>
+      </label>
+
+      <label class="filter-label">
+        <span>Show</span>
+        <select id="status-filter" aria-label="Filter reports by status">
+          <option value="all">All reports</option>
+          <option value="Lost">Lost items</option>
+          <option value="Found">Found items</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="category-list" aria-label="Filter by category">
+    <button class="category-chip active" data-category="all">All items</button>
+    <button class="category-chip" data-category="Electronics">💻 Electronics</button>
+    <button class="category-chip" data-category="Bags">🎒 Bags</button>
+    <button class="category-chip" data-category="Accessories">💧 Accessories</button>
+    <button class="category-chip" data-category="Books">📚 Books</button>
+    <button class="category-chip" data-category="Other">📦 Other</button>
+  </div>
+
+  <div id="item-grid" class="item-grid"></div>
+  <p id="empty-message" class="empty-message" hidden>
+    No matching reports. Try a different search or filter.
+  </p>
+</section>
+
         </label>
       </div>
 
@@ -140,10 +170,31 @@
           </select>
         </label>
 
-        <label>
-          Campus location *
-          <input id="item-location" required maxlength="100" placeholder="e.g. Library, Block C">
-        </label>
+<label>
+  Select campus *
+  <select id="item-campus" required>
+    <option value="">Choose a campus</option>
+  </select>
+</label>
+
+<label>
+  Event name (optional)
+  <input
+    id="item-event"
+    maxlength="100"
+    placeholder="e.g. AZINHACK 2026"
+  >
+</label>
+
+<label>
+  Campus location *
+  <input
+    id="item-location"
+    required
+    maxlength="100"
+    placeholder="e.g. Library, Block C"
+  >
+</label>
 
         <label>
           Date lost or found *
