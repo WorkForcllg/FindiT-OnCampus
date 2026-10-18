@@ -18,9 +18,6 @@ A lost and found Platform.
 ## Live Demo
 https://findit-oncampus-frontend.vercel.app/
 
-## GitHub Repository
-https://github.com/WorkForcllg/FindiT-OnCampus
-
 ## Team
 - Parth Sahany
 - Tanush Sharma
